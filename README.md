@@ -1,4 +1,4 @@
-# TASK MANAGER WEB APP
+# Task Manager Web App
 
 This project was implemented using React, Redux and Axios. It's a simple version that can be improve.
 
