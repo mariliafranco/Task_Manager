@@ -10,6 +10,11 @@ export const Container = () => {
     height: calc(100vh - 1rem);
     margin-top: 0.1em;
     overflow-y: auto;
+
+    body {
+        margin: 0px;
+        padding: 0px;
+      }
   `;
   const ContainerRow = styled.div`
     background: linear-gradient(

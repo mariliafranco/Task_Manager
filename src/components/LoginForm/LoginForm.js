@@ -79,7 +79,7 @@ export const LoginForm = () => {
         {emailError ? (
           <ErrorMessage> Ops! Esse campo é obrigatório. </ErrorMessage>
         ) : undefined}
-        <InputLayout name="Senha" id="password" placeholder="Senha" />
+        <InputLayout name="Senha" id="password" placeholder="Senha" type='password'/>
         {passwordError ? (
           <ErrorMessage> Ops! O campo senha obrigatório. </ErrorMessage>
         ) : undefined}

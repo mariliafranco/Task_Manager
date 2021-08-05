@@ -8,14 +8,12 @@ const initialState = {
 };
 
 export const asyncActions = {
-  GET_LIST: createAsyncThunk(
-    "https://https://fitec-teste-frontend.free.beeceptor.com/api/dashboard",
-    async () => {
-      const listResult = await tasksListApi.getAll();
+  GET_LIST: createAsyncThunk("GET_TASK_LIST", async () => {
+    const listResult = await tasksListApi.getAll();
 
-      return listResult.data;
-    }
-  ),
+    // eslint-disable-next-line no-eval
+    return eval(listResult.data);
+  }),
 };
 
 export const DashboardSlice = createSlice({
@@ -23,16 +21,19 @@ export const DashboardSlice = createSlice({
   initialState,
   reducers: {
     TOOGLE_MODAL: (state, action) => {
-      state.modalIsOpen = action.payload
+      state.modalIsOpen = action.payload;
     },
-    SAVE_NEW_TASK:(state, action) => {
-      state.taskList = action.payload.push()
-    }
+    SAVE_NEW_TASK: (state, action) => {
+      console.log(action.payload)
+      state.taskList = state.taskList.concat(action.payload);
+      state.modalIsOpen = !state.modalIsOpen;
+      state.refreshList = true
+    },
   },
   extraReducers: (builder) => [
     builder.addCase(asyncActions.GET_LIST.fulfilled, (state, action) => {
-      state.taskList = action.payload;
       state.refreshList = true;
+      state.taskList = action.payload;
     }),
   ],
 });

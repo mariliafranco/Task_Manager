@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { Row, Col } from "antd";
 import { DashboardSlice } from "../../pages/Dashboard/Dashboard.Slice";
 
-export const TasksCardList = () => {
+export const TaskList = () => {
   const dashboardState = useSelector((state) => state.dashboard);
 
   const TasksListContainer = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 0 2rem;
   `;
 
@@ -21,35 +21,38 @@ export const TasksCardList = () => {
     border-left: solid;
     border-left-width: 0.5rem;
     border-radius: 0.5rem;
+    font-family: Georgia, "Times New Roman", Times, serif;
   `;
 
   const CardTitle = styled.div`
     display: flex;
     justify-content: left;
+    font-size: 14px;
+    color: #545454;
     margin: 0.5rem 1rem 0.2rem 1rem;
     height: 2rem;
     font-weight: bold;
-    color: #000000;
   `;
 
   const CardType = styled.div`
     display: flex;
     justify-content: left;
     align-items: center;
+    font-size: 12px;
     margin: -0.6rem 1rem;
     padding-left: 0.3rem;
     width: 6rem;
     height: 1rem;
     border-radius: 5px;
     color: #ffffff;
-    font-size: 15px;
   `;
 
   const CardDescription = styled.div`
     display: flex;
     justify-content: center;
-    margin: 1rem 1rem 0.6rem 1rem;
-    color: #000000;
+    font-size: 14px;
+    margin: 1.3rem 1rem 0.6rem 1rem;
+    color: #373737;
     height: 4rem;
   `;
 
@@ -163,13 +166,13 @@ export const TasksCardList = () => {
 
   const returnSpecialColor = (type) => {
     switch (type) {
-      case 1:
+      case 1 || 'Frontend':
         return "#7a89b8";
 
-      case 2:
+      case 2 || 'Backend':
         return "#F2BE35";
 
-      case 3:
+      case 3 || 'Infraestrutura':
         return "#EB5550";
 
       default:
@@ -184,9 +187,9 @@ export const TasksCardList = () => {
   };
 
   const returnTasksCard = () => {
-    // if (dashboardState.taskList) {
-    // return dashboardState.taskList.map((x) => (
-    return taskList.map((x) => (
+    if (dashboardState.taskList) {
+    return dashboardState.taskList.map((x) => (
+    // return taskList.map((x) => (
       <CardItemLayout
         key={x.id}
         style={{ borderLeftColor: returnSpecialColor(x.type) }}
@@ -214,7 +217,7 @@ export const TasksCardList = () => {
         </Row>
       </CardItemLayout>
     ));
-    // }
+    }
   };
 
   return (

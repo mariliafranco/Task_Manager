@@ -2,7 +2,7 @@ import React from "react";
 import { Row } from "antd";
 import styled from "styled-components";
 
-export const TaskManager = () => {
+export const DashboardCards = () => {
   const CardsLayout = styled.div`
     display: flex;
     align-items: center;

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Row, Col } from "antd";
 import styled from "styled-components";
-import { TasksCardList } from "../../components/TaskCardList/TaskCardList";
-import { TaskManager } from "../../components/TaskManager/TaskManager";
-import { DashboardSlice } from "../../pages/Dashboard/Dashboard.Slice";
+import { TaskList } from "../../components/TaskList/TaskList";
+import { DashboardCards } from "../../components/DashboardCards/DashboardCards";
+import {
+  DashboardSlice,
+  asyncActions,
+} from "../../pages/Dashboard/Dashboard.Slice";
 import { AddTaskModal } from "../../components/AddTaskModal/AddTaskModal";
 
 export const Dashboard = () => {
@@ -60,22 +63,22 @@ export const Dashboard = () => {
 
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (!dashboardState.refreshList) {
-  //     dispatch(asyncActions.GET_LIST());
-  //   }
-  // });
+  useEffect(() => {
+    if (!dashboardState.refreshList) {
+      dispatch(asyncActions.GET_LIST());
+    }
+  });
 
   const closeModal = () => {
     dispatch(DashboardSlice.actions.TOOGLE_MODAL(false));
   };
 
-  const saveNewTask = () => {
-    dispatch(DashboardSlice.actions.SAVE_NEW_TASK());
+  const saveNewTask = (values) => {
+    dispatch(DashboardSlice.actions.SAVE_NEW_TASK(values));
   };
 
   return (
-    <Row style={{ height: "100%"}}>
+    <Row style={{ height: "100%" }}>
       <Navbar>
         <SloganLayout> ReactDo</SloganLayout>
         <ButtonLayout onClick={() => history.push("/login")}>
@@ -87,20 +90,20 @@ export const Dashboard = () => {
         <Row>
           <Col span={24}>
             {" "}
-            <TaskManager />
+            <DashboardCards />
           </Col>
           {dashboardState.modalIsOpen ? (
             <ModalContainer>
               <AddTaskModal
                 open={dashboardState.modalIsOpen}
                 closeModal={closeModal}
-                saveNewTask={saveNewTask}
+                saveNewTask={(values) => saveNewTask(values)}
               />
             </ModalContainer>
           ) : undefined}
 
           <Col span={24}>
-            <TasksCardList />
+            <TaskList />
           </Col>
         </Row>
       </DashboardLayout>

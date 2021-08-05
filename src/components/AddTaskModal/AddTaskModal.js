@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Button, Row, Col } from "antd";
 import styled from "styled-components";
 
-export const AddTaskModal = ({ open, closeModal, saveNewTask }) => {
+export const AddTaskModal = ({ closeModal, saveNewTask }) => {
   const [nameError, setNameError] = useState(null);
-  const [categoryError, setCategoryError] = useState(null);
+  const [typeError, setTypeError] = useState(null);
   const [progressError, setProgressError] = useState(null);
   const [descriptionError, setDescriptionError] = useState(null);
 
@@ -71,7 +71,7 @@ export const AddTaskModal = ({ open, closeModal, saveNewTask }) => {
 
   const saveTask = () => {
     const name = document.getElementById("name").value;
-    const category = document.getElementById("category").value;
+    const type = document.getElementById("type").value;
     const progress = document.getElementById("progress").value;
     const description = document.getElementById("description").value;
 
@@ -79,8 +79,8 @@ export const AddTaskModal = ({ open, closeModal, saveNewTask }) => {
       setNameError("required");
     }
 
-    if (!category) {
-      setCategoryError("required");
+    if (!type) {
+      setTypeError("required");
     }
 
     if (!progress) {
@@ -89,8 +89,8 @@ export const AddTaskModal = ({ open, closeModal, saveNewTask }) => {
 
     if (!description) {
       setDescriptionError("required");
-    } else if (name && category && progress && description) {
-      saveNewTask({ name, category, progress, description });
+    } else if (name && type && progress && description) {
+      saveNewTask({ name, type, progress, description });
     }
   };
 
@@ -130,7 +130,7 @@ export const AddTaskModal = ({ open, closeModal, saveNewTask }) => {
             ) : undefined}
             <div className="select-container">
               <select
-                id="category"
+                id="type"
                 placeholder="Categoria"
                 style={{
                   marginBottom: "1rem",
@@ -148,7 +148,7 @@ export const AddTaskModal = ({ open, closeModal, saveNewTask }) => {
                 <option value="Infraestrutura">Infraestrutura</option>
               </select>
             </div>
-            {categoryError ? (
+            {typeError ? (
               <ErrorMessage> Ops! Esse campo é obrigatório. </ErrorMessage>
             ) : undefined}
             <InputItem placeholder="Progresso" id="progress" />
