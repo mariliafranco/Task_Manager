@@ -79,52 +79,6 @@ export const TaskList = () => {
     background-color: #e9e9e9;
   `;
 
-
-  const taskList = [
-    {
-      id: 1,
-      name: "Breadcrumb",
-      description: "Criar um novo breadcrumb para a aplicação web",
-      progress: 0,
-      type: 1,
-    },
-    {
-      id: 2,
-      name: "Navegação",
-      description: "Criar a navegação para a aplicação web",
-      progress: 25,
-      type: 1,
-    },
-    {
-      id: 3,
-      name: "Cross-origin",
-      description: "Configurar os endpoints para não dar erro de cross origin",
-      progress: 25,
-      type: 2,
-    },
-    {
-      id: 4,
-      name: "AWS",
-      description: "Configurar a infra para CD/CI",
-      progress: 70,
-      type: 3,
-    },
-    {
-      id: 5,
-      name: "Integração API",
-      description: "Integrar o novo endpoint no front",
-      progress: 30,
-      type: 1,
-    },
-    {
-      id: 6,
-      name: "Endpoint Login",
-      description: "Criar endpoint para login",
-      progress: 45,
-      type: 2,
-    },
-  ];
-
   const NewTaskButton = styled.button`
     height: 6rem;
     border-radius: 0.6rem;
@@ -189,7 +143,6 @@ export const TaskList = () => {
   const returnTasksCard = () => {
     if (dashboardState.taskList) {
     return dashboardState.taskList.map((x) => (
-    // return taskList.map((x) => (
       <CardItemLayout
         key={x.id}
         style={{ borderLeftColor: returnSpecialColor(x.type) }}
